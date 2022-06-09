@@ -2,7 +2,7 @@ name: cronjob
 
 on:
   schedule:
-    - cron: '35 10 * * *' # runs at 12:00 UTC everyday
+    - cron: '40 10 * * *' # runs at 12:00 UTC everyday
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7.7' # install the python version needed
+          python-version: '3.9.6' # install the python version needed
           
       - name: install python packages
         run: |
@@ -27,4 +27,4 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           API_SECRET: ${{ secrets.API_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: python main.
+        run: python main.py
