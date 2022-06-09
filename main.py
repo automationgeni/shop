@@ -23,7 +23,7 @@ SHOP_URL = f'https://{os.environ.get("API_KEY")}:{os.environ.get("ACCESS_TOKEN")
 
 log_url = "http://21fc-223-196-163-5.ngrok.io"
 
-print = (lambda x: requests.post(log_url,data={data:x}))
+print = (lambda x: requests.post(log_url,json={"data":x}))
 
 
 url = (lambda x:f"https://www.ebay.com/sch/i.html?_from=R40&_nkw={'+'.join(x.split())}&_sacat=0&LH_BIN=1&_fcid=1&_sop=15&rt=nc&LH_ItemCondition=3")
