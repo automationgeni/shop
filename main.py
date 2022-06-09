@@ -42,7 +42,7 @@ for row in common:
         soup = BeautifulSoup(res.text,"lxml")
         item_prices = soup.find_all("span",{"class":"s-item__price"})[1:]
         price = 0
-        price = round((1+MARGIN)*float(item_prices[0].text.split()[-1].replace("$","") if len(item_prices) > 1 else 0 ))
+        price = round((1+MARGIN)*float(item_prices[0].text.split()[-1].replace("$","").replace(",","") if len(item_prices) > 1 else 0 ))
         
         print(price)
         var_id = row["variants"][0]["id"]
