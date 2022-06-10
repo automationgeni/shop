@@ -34,10 +34,10 @@ headers = {"Accept": "application/json", "Content-Type": "application/json"}
 df["SKU"] = df["product_title"].str.replace("-","").str.split().str[0]
 SKUS = [i["variants"][0]["sku"] for i in data]
 
-common = []
+common = data
 
-for index,i in enumerate(SKUS):
-    common.extend(data[index] for j in df["SKU"] if i.replace("-","") == j)
+#for index,i in enumerate(SKUS):
+#    common.extend(data[index] for j in df["SKU"] if i.replace("-","") == j)
 
 def scrape(row):
     try:
