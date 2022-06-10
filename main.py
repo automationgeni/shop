@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     with ProcessPoolExecutor(max_workers=6) as executor:
         start = time.time()
-        futures = [ executor.submit(scrape, url) for url in common[:30]]
+        futures = [ executor.submit(scrape, url) for url in common]
         results = list(as_completed(futures))
         end = time.time()
         print("Time Taken: {:.6f}s".format(end-start))
