@@ -13,7 +13,6 @@ import random
 
 dotenv.load_dotenv()
 
-MARGIN = 0.3
 SHOP_URL = f'https://{os.environ.get("API_KEY")}:{os.environ.get("ACCESS_TOKEN")}@automation-genie.myshopify.com/admin'
 
 # data = requests.get(SHOP_URL+"/products.json").json()
@@ -40,7 +39,7 @@ common = []
 for index,i in enumerate(SKUS):
     common.extend(data[index] for j in df["SKU"] if i.replace("-","") == j)
 
-for row in common:
+def scrape(row):
     try:
         print(row["title"])
         res = requests.get(url(row["variants"][0]["sku"]))
@@ -55,7 +54,6 @@ for row in common:
         else: MARGIN = 0.3
 
         price = round((1+MARGIN)*price)
-        
         print(price)
         var_id = row["variants"][0]["id"]
 
@@ -67,3 +65,18 @@ for row in common:
     except Exception as e:
         print(e)
         time.sleep(10)
+
+
+
+from concurrent.futures import ProcessPoolExecutor,as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import Future 
+
+if __name__ == "__main__":
+
+    with ProcessPoolExecutor(max_workers=6) as executor:
+        start = time.time()
+        futures = [ executor.submit(scrape, url) for url in common[:30]]
+        results = list(as_completed(futures))
+        end = time.time()
+        print("Time Taken: {:.6f}s".format(end-start))
