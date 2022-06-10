@@ -20,7 +20,7 @@ SHOP_URL = f'https://{os.environ.get("API_KEY")}:{os.environ.get("ACCESS_TOKEN")
 # json.dump(data,open("data.json","w"))
 
 
-log_url = "http://21fc-223-196-163-5.ngrok.io"
+log_url = "http://989c-223-196-160-34.ngrok.io"
 
 print = (lambda x: requests.post(log_url,json={"data":str(x)}))
 
