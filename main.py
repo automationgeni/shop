@@ -48,7 +48,13 @@ for row in common:
         soup = BeautifulSoup(res.text,"lxml")
         item_prices = soup.find_all("span",{"class":"s-item__price"})[1:]
         price = 0
-        price = round((1+MARGIN)*float(item_prices[0].text.split()[-1].replace("$","").replace(",","") if len(item_prices) > 1 else 0 ))
+        price = float(item_prices[0].text.split()[-1].replace("$","").replace(",","") if len(item_prices) > 1 else 0 )
+        
+        if price < 750: MARGIN = 0.6
+        elif price < 2000: MARGIN = 0.4
+        else: MARGIN = 0.3
+
+        price = round((1+MARGIN)*price)
         
         print(price)
         var_id = row["variants"][0]["id"]
