@@ -74,7 +74,7 @@ from concurrent.futures import Future
 
 if __name__ == "__main__":
 
-    with ProcessPoolExecutor(max_workers=10) as executor:
+    with ProcessPoolExecutor(max_workers=15) as executor:
         start = time.time()
         futures = [ executor.submit(scrape, url) for url in common]
         results = list(as_completed(futures))
